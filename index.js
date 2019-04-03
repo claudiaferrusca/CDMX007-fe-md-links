@@ -5,12 +5,14 @@
 
  const fs = require("fs");
 
-  fs.readFile("./README.md", function (err,data) {
+  fs.readFile("./README.md","utf-8", function (err,data) {
     if (err) {
       console.log(err('ha ocurrido un error'));
     }
-    const read = data.toString();
+    var urlRegex = /(https?:\/\/[^\s]+)/g;
+    const result = data.match (urlRegex);
+    // const read = data
  
-    console.log(read)
+    console.log(result)
     })
- 
+ //module.exports.
