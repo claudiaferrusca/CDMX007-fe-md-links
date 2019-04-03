@@ -5,6 +5,7 @@
 
  const fs = require("fs");
 
+ const readLinks = () =>{
   fs.readFile("./README.md","utf-8", function (err,data) {
     if (err) {
       console.log(err('ha ocurrido un error'));
@@ -15,4 +16,9 @@
  
     console.log(result)
     })
- //module.exports.
+ }
+
+ readLinks()
+ module.exports = readLinks
+
+ 

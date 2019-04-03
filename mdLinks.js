@@ -1,10 +1,5 @@
-//para leer los links elemenos debe de ser con readdir
-const searchMdLinks = (data) => {
-    const mdLinks = data.match();
-      console.log("yo");   
-}
+//mi global d e leer los links
+const readLinks = require("./index.js")
 
-module.exports ={
-    searchMdLinks
-}
+const rLinks=("./README.md")
 
