@@ -1,19 +1,30 @@
 {
-    "name": "md-links",
-    "version": "1.0.0",
-    "main": "src/index.js",
-    "license": "MIT",
-    "scripts": {
-      "eslint": "eslint --ext .js . test/",
-      "pretest": "npm run eslint",
-      "test": "jest --coverage"
-    },
-    "dependencies": {
-      "eslint": "^5.9.0",
-      "eslint-plugin-jest": "^22.1.2",
-      "htmlhint": "^0.10.1",
-      "jest": "^23.6.0"
-    }
-   }
-   
-   
+  "name": "mdlinks",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "license": "MIT",
+  "scripts": {
+    "eslint": "eslint --ext .js . test/",
+    "pretest": "npm run eslint",
+    "test": "jest --coverage"
+  },
+  "dependencies": {
+    "eslint": "^5.9.0",
+    "eslint-plugin-jest": "^22.1.2",
+    "htmlhint": "^0.10.1",
+    "jest": "^23.6.0",
+    "node-fetch": "^2.3.0"
+  },
+  "description": "## Preámbulo",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "links"
+  },
+  "author": "",
+  "bin": {
+    "mdlinks": "./cli.js"
+  }
+}
