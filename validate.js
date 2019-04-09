@@ -1,18 +1,20 @@
 const fetch = require('node-fetch');
 const readLinks = require("./index.js")
 const rLinks=("./README.md")
-//no hacer caso
+//no hacer caso    
+ 
+
 function checkStatus(res) {
-    if (res.ok) { 
-        return res;
-    } else {
-        return res
+  if (res.ok) { 
+    return res;
+  } else {
+    return null
     }
 }
  
-fetch('./')
+fetch('urlRegex')
     .then(checkStatus)
-    .then(res => console.log('no hay nada'))
+    .then(res => console.log(' hay algo'))
 
 
 
@@ -21,7 +23,7 @@ fetch('./')
         for (let i = 0; i < urlRegex.length; i++) {
           fetch(urlRegex[i])
             .then(response =>
-              console.log(`Text: ${urlRegex[i]}\nResponse code: ${response.status}\nResponse: ${response.statusText}\n`))
+              console.log(`Text: ${urlRegex[i]}\nResponse code: ${response.status}`))
         }
       }
 
