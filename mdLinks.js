@@ -3,7 +3,7 @@ const readLinks = require("./index.js")
 
 const rLinks=("./README.md")
 
-const getLinks = (file, data , validate) =>{
+const getLinks = (file, data , validate, callback) =>{
 
     //  const urlRegex = /(https?:\/\/[^\s]+)/g;
      const allLinks=  /\[([^\[\]]+)\]\(([^)]+)/g;
@@ -16,7 +16,7 @@ const getLinks = (file, data , validate) =>{
        const coincidenceText = element.match(text);
        const sliceText= coincidenceText[1].slice(0,-1);
   if (validate){
-    dataFetch(coincidenceLink[1],file,sliceText)
+    callback(coincidenceLink[1],file,sliceText)
   } else {
     console.log(`${file} - ${coincidenceLink[1]} - ${sliceText}`)
   }

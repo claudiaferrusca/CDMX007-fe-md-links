@@ -6,6 +6,7 @@ const file= process.argv[2];
 
 const validate= process.argv[3];
 
+
 readLinks.readLinks(file,validate);
 
 

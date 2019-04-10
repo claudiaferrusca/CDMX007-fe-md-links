@@ -15,22 +15,25 @@ const links = require ("./mdlinks");
     if (err) {
       // return console.log(err);
     } else {
-      links.getLinks(file, data, validate);
+      links.getLinks(file, data, validate, dataFetch);
     }
   }) 
 }
 const dataFetch = async(url,file, text)=>{
   console.log(url);
-  const resultData = await fetch (url)
-  .then(data => data)
-  .catch (err => console.log("no es una url", url))
-  if(resultData === undefined){
-  return console.log ("no tuvimos respuesta")
-} else {
+  const newPromise = new Promise ((resolve, reject) => {
+    fetch (url)
+    .then(resultData => {
+      console.log(`${file} ${resultData.url} ${resultData.statusText} ${resultData.status} ${text}`)
+      resolve(resultData);
+    })
+    .catch (err => console.log("no es una url", url))
+  });
+ 
+  const resultData = await newPromise
   // console.log(resultData)2
-  console.log(`${file}-${resultData.url}-${resultData.statusText}-${resultData.status}-${text}`)
 
-}
+
 if(options.validate && options.stats){
   console.log("estadistica");
 let totalLinks = 0; 
@@ -41,10 +44,23 @@ for (let i=0; i<resultData.length; ++i){
       if (resultData[i]!==resultData[j]){
         countUnique ++
       }
-return console.log(totalLinks)
+ return console.log(totalLinks)
     }
 
-  }
+  } 
+//   if (options.validate){
+//  result.forEach(element=>{
+//    console.log(`${resultData.status}-${resultMessage.status}`)
+//    if(resultData=== null){
+//      console.log ("Broken")
+//    } else {
+//      console.log("Links")
+//    }  if(options.stats){
+//      resultData()
+//    }
+
+//  })
+  //}
 }
 // }else if(la opcion es validar){
 //   va a hacer la petición a fetch de cada links(foreach), va a regresar(consolear) el status de cada link y su statusMessage
@@ -56,7 +72,7 @@ return console.log(totalLinks)
 // }else if (la opcion es stats){
 //   llamar a la funcion que cuenta links
 // }
-// }
+// } 
 
    
  const readDirectory = ()=>{
@@ -73,6 +89,7 @@ return console.log(totalLinks)
               if (err){
                 console.log(err);
 
+
               } else {
                
               }
@@ -84,5 +101,6 @@ return console.log(totalLinks)
     
   }
   readDirectory();
-  module.exports.readLinks = readLinks;
 }
+
+module.exports.readLinks = readLinks;
