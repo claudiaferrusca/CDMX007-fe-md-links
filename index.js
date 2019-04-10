@@ -1,22 +1,21 @@
 // module.exports = () => {
 //   // indefinido
 // };
-//Requiero el File system y la ruta
-//funcion para leer el readme , con utf-8 lo covierto en string, inicia la funcion con dos parametros , error y toda la data 
-//si es un error que me console que ha ocurrido un error
-//Despues viene la variable para detectar url  y si url no es igual a error consoleame el resultado
+
  const fs = require("fs");
  const path = require ("path");
  const fetch = require ("node-fetch")
+const links = require ("./mdlinks");
+
 
  const readLinks = (file , validate) => {
-   console.log(file);
+  //  console.log(file);
   fs.readFile(file,"utf-8", function (err,data) {
     console.log('asdds')
     if (err) {
       // return console.log(err);
     } else {
-      getLinks(file, data, validate)
+      links.getLinks(file, data, validate);
     }
   }) 
 }
@@ -32,41 +31,37 @@ const dataFetch = async(url,file, text)=>{
   console.log(`${file}-${resultData.url}-${resultData.statusText}-${resultData.status}-${text}`)
 
 }
+if(options.validate && options.stats){
+  console.log("estadistica");
+let totalLinks = 0; 
+let countUnique = 0;
+for (let i=0; i<resultData.length; ++i){
+  unique ++;
+    for (let j= i+1; j<resultData.lenght; j++){
+      if (resultData[i]!==resultData[j]){
+        countUnique ++
+      }
+return console.log(totalLinks)
+    }
+
+  }
 }
- const getLinks = (file, data , validate) =>{
+// }else if(la opcion es validar){
+//   va a hacer la petición a fetch de cada links(foreach), va a regresar(consolear) el status de cada link y su statusMessage
+//   if(está roto){
+//     muestra un mensaje
+//   } else {
+//     mostrar otro mensaje
+//   }
+// }else if (la opcion es stats){
+//   llamar a la funcion que cuenta links
+// }
+// }
 
-  //  const urlRegex = /(https?:\/\/[^\s]+)/g;
-   const allLinks=  /\[([^\[\]]+)\]\(([^)]+)/g;
-   const result = data.match (allLinks);
-
-   const link = /\(([^)]+)/ ;//agarra unicamente el link
-   const text = /\[([^\(([^)]+)/;//obtiene el texto
-   result.forEach(element => {
-     const coincidenceLink = element.match(link);
-     const coincidenceText = element.match(text);
-     const sliceText= coincidenceText[1].slice(0,-1);
-if (validate){
-  dataFetch(coincidenceLink[1],file,sliceText)
-} else {
-  console.log(`${file} - ${coincidenceLink[1]} - ${sliceText}`)
-}
-
-})
-
-
-   //indicarle en los corchetes falta cerrar el ) para que pueda leer todo el link
-   //match para obeter lo que manda la expre regular
-    //  if (allLinks != null) {
-    //  }
-    //  console.log(result)
- }
- //se exporta la funcion de leer links para ocupara en otros modulos.
-//  readLinks()
+   
  const readDirectory = ()=>{
    
-   // leer el directorio , entra al readme y dos parametros err o files.
-   //despues de consolear el error, entonces files, por cada elemento ejecuta la funcion  de leer carpetas
-   //si elemento es excatamente igual a .md entonces el elemnto lo haga string, entonces vamos a leer todos los links de todos los archivos 
+  
    fs.readdir("./",(err, files)=>{
      if(err){
        
@@ -79,8 +74,7 @@ if (validate){
                 console.log(err);
 
               } else {
-                // readLinks(data)
-                console.log(element);
+               
               }
             })
           }
@@ -90,12 +84,5 @@ if (validate){
     
   }
   readDirectory();
-  console.log(readDirectory());
-  module.exports = {
-    readLinks,
-    dataFetch,
-    getLinks,
-    readDirectory,
-
-
-  }
+  module.exports.readLinks = readLinks;
+}

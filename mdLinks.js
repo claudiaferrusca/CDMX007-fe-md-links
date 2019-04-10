@@ -3,3 +3,24 @@ const readLinks = require("./index.js")
 
 const rLinks=("./README.md")
 
+const getLinks = (file, data , validate) =>{
+
+    //  const urlRegex = /(https?:\/\/[^\s]+)/g;
+     const allLinks=  /\[([^\[\]]+)\]\(([^)]+)/g;
+     const result = data.match(allLinks);
+  
+     const link = /\(([^)]+)/ ;//agarra unicamente el link
+     const text = /\[([^\(([^)]+)/;//obtiene el texto
+     result.forEach(element => {
+       const coincidenceLink = element.match(link);
+       const coincidenceText = element.match(text);
+       const sliceText= coincidenceText[1].slice(0,-1);
+  if (validate){
+    dataFetch(coincidenceLink[1],file,sliceText)
+  } else {
+    console.log(`${file} - ${coincidenceLink[1]} - ${sliceText}`)
+  }
+  
+  })
+}  
+module.exports.getLinks= getLinks;
