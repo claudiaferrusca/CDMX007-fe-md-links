@@ -21,18 +21,19 @@ const links = require ("./mdlinks");
 }
 const dataFetch = async(url,file, text)=>{
   console.log(url);
-  const newPromise = new Promise ((resolve, reject) => {
+  const newPromise = await new Promise ((resolve, reject) => {
     fetch (url)
     .then(resultData => {
       console.log(`${file} ${resultData.url} ${resultData.statusText} ${resultData.status} ${text}`)
       resolve(resultData);
     })
-    .catch (err => console.log("no es una url", url))
+    .catch (err => console.log("404 - no entra nunca al servidor", url))
   });
  
-  const resultData = await newPromise
-  // console.log(resultData)2
-
+  console.log("nuevapromesa: ", newPromise)
+//const resultData = await newPromise
+console.log("resultData: ", resultData)
+console.log("resultDatito")
 
 if(options.validate && options.stats){
   console.log("estadistica");
@@ -48,19 +49,19 @@ for (let i=0; i<resultData.length; ++i){
     }
 
   } 
-//   if (options.validate){
-//  result.forEach(element=>{
-//    console.log(`${resultData.status}-${resultMessage.status}`)
-//    if(resultData=== null){
-//      console.log ("Broken")
-//    } else {
-//      console.log("Links")
-//    }  if(options.stats){
-//      resultData()
-//    }
+  if (options.validate){
+ result.forEach(element=>{
+   console.log(`${resultData.status}-${resultMessage.status}`)
+   if(resultData=== null){
+     console.log ("Broken")
+   } else {
+     console.log("Links")
+   }  if(options.stats){
+     resultData()
+   }
 
-//  })
-  //}
+ })
+  }
 }
 // }else if(la opcion es validar){
 //   va a hacer la petición a fetch de cada links(foreach), va a regresar(consolear) el status de cada link y su statusMessage
