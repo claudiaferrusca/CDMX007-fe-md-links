@@ -2,7 +2,7 @@
 
 ## Preámbulo
 
-![Diagrama de flujo](mdlinks.png)
+![Diagrama de flujo](./img/mdlinks.png)
 
 
 [Markdown](https://es.wikipedia.org/wiki/Markdown) es un lenguaje de marcado
